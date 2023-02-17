@@ -1,4 +1,4 @@
-// 2023-02-17 09:25
+// 2023-02-17 20:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -70,11 +70,11 @@ if (url.includes("/interface/sdk/sdkad.php")) {
   if (url.includes("/2/cardlist") || url.includes("/2/searchall")) {
     if (obj.cards) {
       let newCards = [];
-      for (const card of obj.cards) {
+      for (let card of obj.cards) {
         let cardGroup = card.card_group;
         if (cardGroup?.length > 0) {
           let newGroup = [];
-          for (const group of cardGroup) {
+          for (let group of cardGroup) {
             let cardType = group.card_type;
             if (cardType !== 118) {
               if (!isAd(group.mblog)) {
@@ -91,6 +91,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         } else {
           let cardType = card.card_type;
           // 9 广告
+          // 17 猜你想搜
           // 58 猜你想搜偏好设置
           // 165 广告
           if ([9, 17, 58, 165, 180, 1007].indexOf(cardType) !== -1) {
