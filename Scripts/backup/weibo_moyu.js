@@ -2,7 +2,7 @@
 > 应用名称：墨鱼自用微博&微博国际版净化脚本
 > 脚本作者：@ddgksf2013, @Zmqcherish 
 > 微信账号：墨鱼手记
-> 更新时间：2022-02-13
+> 更新时间：2022-02-17
 > 通知频道：https://t.me/ddgksf2021
 > 贡献投稿：https://t.me/ddgksf2013_bot
 > 原作者库：https://github.com/zmqcherish
@@ -12,7 +12,7 @@
 > 脚本声明：若有侵犯原作者权利，请邮箱联系删除
 ***********************************************/
 
-const version = "V2.0.98";
+const version = "V2.0.99";
 
 const mainConfig = {
     isDebug: !1,
@@ -102,7 +102,7 @@ const mainConfig = {
     user_center: "modifiedUserCenter",
     "a=get_coopen_ads": "removeIntlOpenAds",
     "php?a=search_topic": "removeSearchTopic",
-    "v2/strategy/ad": "removeStrategyAd"
+    "v1/ad/realtime": "removeRealtimeAd"
   };
 function getModifyMethod(e) {
   for (let t of modifyCardsUrls) if (e.indexOf(t) > -1) return "removeCards";
@@ -110,6 +110,9 @@ function getModifyMethod(e) {
     if (e.indexOf(o) > -1) return "removeTimeLine";
   for (let [i, r] of Object.entries(otherUrls)) if (e.indexOf(i) > -1) return r;
   return null;
+}
+function removeRealtimeAd(e) {
+  return delete e.ads, (e.code = 4016), e;
 }
 function removeIntlOpenAds(e) {
   return (
