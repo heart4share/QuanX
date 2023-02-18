@@ -1,4 +1,4 @@
-// 2023-02-18 16:25
+// 2023-02-18 17:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -132,10 +132,10 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         let newItems = [];
         for (let item of items) {
           if (!isAd(item.data)) {
-            // 头像挂件,关注按钮
-            removeAvatar(item.data);
             // 微博伪装评论
             if (item.data.user) {
+              // 头像挂件,关注按钮
+              removeAvatar(item.data);
               if (
                 item.data.user.name === "超话社区" ||
                 item.data.user.name === "微博视频"
@@ -453,6 +453,8 @@ if (url.includes("/interface/sdk/sdkad.php")) {
       obj.items = newItems;
     }
   } else if (url.includes("/2/statuses/show")) {
+    // 头像挂件,关注按钮
+    removeAvatar(obj);
     // 商品橱窗
     if (obj?.common_struct) {
       delete obj.common_struct;
