@@ -113,11 +113,6 @@ if (url.includes("/faas/amap-navigation/main-page")) {
       delete obj.data.modules[i];
     });
   }
-} else if (url.includes("/shield/search_poi/homepage")) {
-  if (obj.history_tags) {
-    delete obj.history_tags.tags;
-    delete obj.history_tags.richText;
-  }
 } else if (url.includes("/shield/search_poi/tips_operation_location")) {
   // 各种红包卡卷优惠
   if (obj.data.coupon) {
