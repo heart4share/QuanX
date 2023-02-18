@@ -1,4 +1,4 @@
-// 2023-02-18 14:35
+// 2023-02-18 15:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -235,6 +235,8 @@ if (url.includes("/interface/sdk/sdkad.php")) {
           }
         } else if (item.category === "feed") {
           if (!isAd(item.data)) {
+            // 头像挂件,关注按钮
+            removeAvatar(item.data);
             // 商品橱窗
             if (item.data?.common_struct) {
               delete item.data.common_struct;
