@@ -1,4 +1,4 @@
-# 2023-02-16 08:15
+# 2023-02-18 14:35
 
 # ======= A ======= #
 # 安全浏览限制解除
@@ -92,9 +92,6 @@ HOST,kadmimage.biz.weibo.com,REJECT
 HOST,sdkaction.biz.weibo.com,REJECT
 HOST,sdkclick.biz.weibo.com,REJECT
 HOST,sdkmonitor.biz.weibo.com,REJECT
-# 微博 头像挂件
-HOST,new.vip.weibo.cn,REJECT
-HOST,vip.storage.weibo.com,REJECT
 
 # ======= X ======= #
 # 迅雷 解除版权限制
