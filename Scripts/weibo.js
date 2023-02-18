@@ -1,4 +1,4 @@
-// 2023-02-18 15:00
+// 2023-02-18 15:40
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -75,6 +75,8 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         if (cardGroup?.length > 0) {
           let newGroup = [];
           for (let group of cardGroup) {
+            // 头像挂件,关注按钮
+            removeAvatar(group.mblog);
             let cardType = group.card_type;
             if (cardType !== 118) {
               if (!isAd(group.mblog)) {
@@ -98,6 +100,8 @@ if (url.includes("/interface/sdk/sdkad.php")) {
             continue;
           } else {
             if (!isAd(card.mblog)) {
+              // 头像挂件,关注按钮
+              removeAvatar(card.mblog);
               newCards.push(card);
             }
           }
@@ -562,26 +566,26 @@ function isAd(data) {
 
 // 移除头像挂件,关注按钮
 function removeAvatar(data) {
-  if (data.user?.cardid) {
-    delete data.user.cardid;
-  }
-  if (data.user?.avatar_extend_info) {
-    delete data.user.avatar_extend_info;
-  }
-  if (data.user?.icons) {
-    delete data.user.icons;
-  }
-  if (data.user?.avatargj_id) {
-    delete data.user.avatargj_id;
-  }
   if (data?.cardid) {
     delete data.cardid;
+  }
+  if (data?.buttons) {
+    delete data.buttons;
   }
   if (data?.pic_bg_new) {
     delete data?.pic_bg_new;
   }
-  if (data?.buttons) {
-    delete data.buttons;
+  if (data?.user?.cardid) {
+    delete data.user.cardid;
+  }
+  if (data?.user?.avatar_extend_info) {
+    delete data.user.avatar_extend_info;
+  }
+  if (data?.user?.icons) {
+    delete data.user.icons;
+  }
+  if (data?.user?.avatargj_id) {
+    delete data.user.avatargj_id;
   }
   return data;
 }
