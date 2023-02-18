@@ -1,4 +1,4 @@
-// 2023-02-18 17:05
+// 2023-02-18 17:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -194,7 +194,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
     }
   } else if (url.includes("/2/page")) {
     // 搜索页列表,超话
-    if (obj.cards?.length > 0) {
+    if (obj.cards) {
       if (obj.cards[0].card_group) {
         obj.cards[0].card_group = obj.cards[0].card_group.filter(
           (c) =>
@@ -204,23 +204,22 @@ if (url.includes("/interface/sdk/sdkad.php")) {
               c?.itemid?.includes("ads_word")
             )
         );
-      } else if (obj.cards) {
-        obj.cards = obj.cards.filter(
-          (i) =>
-            !(
-              i.itemid.includes("feed_-_invite") || // 超话里的好友
-              i.itemid.includes("infeed_friends_recommend") || // 好友关注
-              i.itemid.includes("infeed_may_interest_in") || // 你可能感兴趣的超话
-              i.itemid.includes("infeed_pagemanual3") || // 手动区域3
-              i.itemid.includes("infeed_weibo_mall") || // 微博小店
-              i?.mblog?.mblogtypename === "广告"
-            )
-        );
-      } else if (obj.card_group) {
-        obj.card_group = obj.card_group.filter(
-          (i) => !(i?.desc === "你可能感兴趣的超话")
-        );
       }
+      obj.cards = obj.cards.filter(
+        (i) =>
+          !(
+            i.itemid?.includes("feed_-_invite") || // 超话里的好友
+            i.itemid?.includes("infeed_friends_recommend") || // 好友关注
+            i.itemid?.includes("infeed_may_interest_in") || // 你可能感兴趣的超话
+            i.itemid?.includes("infeed_pagemanual3") || // 手动区域3
+            i.itemid?.includes("infeed_weibo_mall") || // 微博小店
+            i?.mblog?.mblogtypename === "广告"
+          )
+      );
+    } else if (obj.card_group) {
+      obj.card_group = obj.card_group.filter(
+        (i) => !(i?.desc === "你可能感兴趣的超话")
+      );
     }
   } else if (url.includes("/2/profile/container_timeline")) {
     // 个人主页信息流
