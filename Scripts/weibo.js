@@ -1,4 +1,4 @@
-// 2023-02-18 15:40
+// 2023-02-18 16:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -233,7 +233,9 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         } else if (item.category === "group") {
           // 遍历group,保留置顶微博
           for (let ii of item.items) {
-            if (ii.data.itemid === "profile_top") {
+            if (ii.category === "feed") {
+              // 头像挂件,关注按钮
+              removeAvatar(ii.data);
               newItems.push(item);
             }
           }
