@@ -1,4 +1,4 @@
-// 2023-02-18 16:05
+// 2023-02-18 16:25
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -135,11 +135,13 @@ if (url.includes("/interface/sdk/sdkad.php")) {
             // 头像挂件,关注按钮
             removeAvatar(item.data);
             // 微博伪装评论
-            if (
-              item.data.user.name === "超话社区" ||
-              item.data.user.name === "微博视频"
-            ) {
-              continue;
+            if (item.data.user) {
+              if (
+                item.data.user.name === "超话社区" ||
+                item.data.user.name === "微博视频"
+              ) {
+                continue;
+              }
             }
             // 评论气泡
             if (item.data?.comment_bubble) {
