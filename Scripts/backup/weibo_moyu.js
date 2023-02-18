@@ -2,7 +2,7 @@
 > 应用名称：墨鱼自用微博&微博国际版净化脚本
 > 脚本作者：@ddgksf2013, @Zmqcherish 
 > 微信账号：墨鱼手记
-> 更新时间：2022-02-17
+> 更新时间：2022-02-18
 > 通知频道：https://t.me/ddgksf2021
 > 贡献投稿：https://t.me/ddgksf2013_bot
 > 原作者库：https://github.com/zmqcherish
@@ -12,7 +12,7 @@
 > 脚本声明：若有侵犯原作者权利，请邮箱联系删除
 ***********************************************/
 
-const version = "V2.0.99";
+const version = "V2.0.100";
 
 const mainConfig = {
     isDebug: !1,
@@ -500,10 +500,8 @@ function removeMediaHomelist(e) {
   mainConfig.removeLiveMedia && (log("remove 首页直播"), (e.data = {}));
 }
 function removeComments(e) {
-  let t = ["广告", "廣告"];
-  mainConfig.removeRelateItem && t.push(...["相关内容"]),
-    mainConfig.removeRecommendItem && t.push(...["推荐", "热推"]);
-  let o = e.datas || [];
+  let t = ["广告", "廣告", "相关内容", "推荐", "热推", "推薦"],
+    o = e.datas || [];
   if (0 === o.length) return;
   let i = [];
   for (let r of o) {
