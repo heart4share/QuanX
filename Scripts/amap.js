@@ -1,4 +1,4 @@
-// 2023-02-19 16:00
+// 2023-02-19 16:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -80,6 +80,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     // "evaluate", // 高德出行评分
     "reviews", // 用户评价
     // "packageShelf",
+    // "hkfMiniPortal", // 订票页面 飞机 火车 汽车
     // "smallOrListBizRec",
     "listBizRec_2", // 周边餐饮
     "smallListBizRec", // 周边热门酒店
