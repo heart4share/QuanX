@@ -1,4 +1,4 @@
-// 2023-02-19 15:20
+// 2023-02-19 16:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -81,6 +81,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     "reviews", // 用户评价
     // "packageShelf",
     // "smallOrListBizRec",
+    "listBizRec_2", // 周边餐饮
     "smallListBizRec", // 周边热门酒店
     "multi_page_anchor", // 二级导航菜单 门票 评论 推荐
     "bigListBizRec", // 周边景点推荐 三张景点大图
@@ -102,6 +103,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     // "scenic_knowledge",
     // "scenic_helper", // 景区助手 开放时间 旺季 淡季
     // "human_traffic", // 人流量情况 有统计图
+    // "traffic", // 交通出行 地铁站 公交站 停车场
     // "scenic_guide",
     // "scenic_route",
     // "scenic_story",
