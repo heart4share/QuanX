@@ -1,4 +1,4 @@
-// 2023-02-19 16:05
+// 2023-02-19 16:55
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -15,13 +15,39 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     obj.data.mapBizList = [];
   }
 } else if (url.includes("/mapapi/poi/infolite")) {
-  // 搜索结果 城市页面
-  let poi = obj.data.district.poi_list[0];
-  if (poi?.transportation) {
-    delete poi.transportation;
-  }
-  if (poi?.feed_rec_tab) {
-    delete poi.feed_rec_tab;
+  // 搜索结果 列表详情
+  if (obj.data.district) {
+    let poi = obj.data.district.poi_list[0];
+    // 订票横幅 订票用高德 出行享低价
+    if (poi?.transportation) {
+      delete poi.transportation;
+    }
+    // 周边推荐 列表项 景点 酒店 美食
+    if (poi?.feed_rec_tab) {
+      delete poi.feed_rec_tab;
+    }
+  } else if (obj.data.list_data) {
+    let list = obj.data.list_data.content[0];
+    if (list?.bottom?.taxi_button) {
+      list.bottom.taxi_button = 0;
+    }
+    // 底栏 酒店
+    if (list?.bottom?.bottombar_button?.hotel) {
+      delete list.bottom.bottombar_button.hotel;
+    }
+    if (list?.map_bottom_bar?.hotel) {
+      delete list.map_bottom_bar.hotel;
+    }
+    if (list?.poi?.item_info?.tips_bottombar_button?.hotel) {
+      delete list.poi.item_info.tips_bottombar_button.hotel;
+    }
+    if (list?.tips_operation_info) {
+      delete list.tips_operation_info;
+    }
+    // 底栏 打车
+    if (list?.bottom?.bottombar_button?.takeCar) {
+      delete list.bottom.bottombar_button.takeCar;
+    }
   }
 } else if (url.includes("/promotion-web/resource")) {
   // 打车页面
@@ -65,7 +91,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     );
   }
 } else if (url.includes("/shield/search/poi/detail")) {
-  // 搜索结果 景点详情页
+  // 搜索结果 模块详情
   const item = [
     // "normal_nav_bar", // 右上角图标 客服 反馈
     // "base_info",
