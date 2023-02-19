@@ -1,11 +1,11 @@
-// 2023-02-18 21:10
+// 2023-02-19 15:20
 
 const url = $request.url;
 if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
 
 if (url.includes("/faas/amap-navigation/main-page")) {
-  // 首页卡片
+  // 首页底部卡片
   if (obj.data.cardList) {
     obj.data.cardList = obj.data.cardList.filter(
       (item) => item.dataKey === "LoginCard"
@@ -13,6 +13,15 @@ if (url.includes("/faas/amap-navigation/main-page")) {
   }
   if (obj.data.mapBizList) {
     obj.data.mapBizList = [];
+  }
+} else if (url.includes("/mapapi/poi/infolite")) {
+  // 搜索结果 城市页面
+  let poi = obj.data.district.poi_list[0];
+  if (poi?.transportation) {
+    delete poi.transportation;
+  }
+  if (poi?.feed_rec_tab) {
+    delete poi.feed_rec_tab;
   }
 } else if (url.includes("/promotion-web/resource")) {
   // 打车页面
@@ -36,6 +45,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     delete obj.data.footPrintV2;
   }
 } else if (url.includes("/shield/frogserver/aocs")) {
+  // 首页右上角
   const item = [
     "operation_layer", // 首页右上角图层
     "home_business_position_config", // 首页右上角动图
@@ -55,7 +65,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     );
   }
 } else if (url.includes("/shield/search/poi/detail")) {
-  // 景点详情页
+  // 搜索结果 景点详情页
   const item = [
     // "normal_nav_bar", // 右上角图标 客服 反馈
     // "base_info",
@@ -108,6 +118,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     });
   }
 } else if (url.includes("/shield/search_poi/tips_operation_location")) {
+  // 搜索页面 地点建议
   // 各种红包卡卷优惠
   if (obj.data.coupon) {
     delete obj.data.coupon;
